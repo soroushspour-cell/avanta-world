@@ -3,414 +3,517 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVANTA WORLD | SPICES</title>
+<title>Avanta World | Spices</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 
+:root{
+--red:#ff2929;
+--orange:#ff7900;
+--yellow:#ffd500;
+}
+
 body{
- background:#080f0b;
- color:white;
- font-family:Arial,sans-serif;
- overflow-x:hidden;
+font-family:Arial,sans-serif;
+min-height:100vh;
+color:white;
+overflow-x:hidden;
+background:
+radial-gradient(circle at 15% 15%,#641400,transparent 42%),
+radial-gradient(circle at 85% 80%,#7c2600,transparent 42%),
+#160706;
+background-size:200% 200%;
+animation:bgMove 12s ease infinite;
 }
 
-body:before{
- content:"";
- position:fixed;
- inset:0;
- z-index:-3;
- background:
- radial-gradient(circle at 20% 30%,#b68b1830,transparent 35%),
- radial-gradient(circle at 80% 65%,#00b98725,transparent 35%),
- radial-gradient(circle at 50% 50%,#087ac020,transparent 55%),
- #080f0b;
+@keyframes bgMove{
+0%,100%{background-position:0% 0%}
+50%{background-position:100% 100%}
 }
 
-body:after{
- content:"";
- position:fixed;
- inset:-50%;
- z-index:-2;
- pointer-events:none;
- background:conic-gradient(
- transparent,#e6b94b15,transparent,#00e5a51b,transparent
- );
- animation:worldSpin 30s linear infinite;
+#particles{
+position:fixed;
+inset:0;
+overflow:hidden;
+pointer-events:none;
+z-index:0;
 }
 
-@keyframes worldSpin{
- to{transform:rotate(360deg)}
+.particle{
+position:absolute;
+bottom:-30px;
+border-radius:50%;
+opacity:0;
+animation:floatUp linear infinite;
+filter:blur(.5px);
 }
 
-nav{
- position:fixed;
- top:18px;
- left:5%;
- width:90%;
- display:flex;
- justify-content:space-between;
- align-items:center;
- padding:17px 25px;
- border:1px solid #ffffff20;
- border-radius:18px;
- background:#101a13c9;
- backdrop-filter:blur(18px);
- z-index:20;
+@keyframes floatUp{
+0%{transform:translateY(0) translateX(0) rotate(0);opacity:0}
+10%{opacity:.8}
+80%{opacity:.55}
+100%{transform:translateY(-110vh) translateX(90px) rotate(600deg);opacity:0}
+}
+
+header{
+position:relative;
+z-index:5;
+padding:22px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+background:rgba(40,10,5,.55);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,125,20,.25);
 }
 
 .logo{
- font-weight:900;
- letter-spacing:3px;
- color:#eac66b;
+font-size:27px;
+font-weight:900;
+letter-spacing:2px;
+background:linear-gradient(90deg,#ff2929,#ff9b00,#ffe600,#ff2929);
+background-size:300%;
+-webkit-background-clip:text;
+color:transparent;
+animation:logoShine 4s linear infinite;
 }
 
+@keyframes logoShine{
+to{background-position:300% center}
+}
+
+nav{display:flex;gap:24px}
 nav a{
- color:#ddd;
- text-decoration:none;
- margin-left:20px;
- font-size:13px;
- transition:.3s;
+color:#ffe1c2;
+text-decoration:none;
+transition:.3s;
 }
-
-nav a:hover{color:#eac66b}
+nav a:hover{
+color:var(--yellow);
+text-shadow:0 0 15px var(--orange);
+}
 
 .hero{
- min-height:720px;
- display:flex;
- flex-direction:column;
- align-items:center;
- justify-content:center;
- text-align:center;
- padding:150px 20px 70px;
- position:relative;
- overflow:hidden;
+position:relative;
+z-index:1;
+text-align:center;
+padding:65px 20px 45px;
 }
 
-.hero-content{
- position:relative;
- z-index:3;
+.hero h1{
+font-size:clamp(45px,8vw,75px);
+font-weight:1000;
+background:linear-gradient(90deg,#ff2525,#ff7900,#ffe000,#ff2525);
+background-size:300% auto;
+-webkit-background-clip:text;
+color:transparent;
+animation:titleGlow 4s linear infinite;
 }
 
-.spice-symbol{
- font-size:85px;
- margin-bottom:25px;
- display:inline-block;
- filter:drop-shadow(0 0 25px #eac66b70);
- animation:spiceFloat 3s ease-in-out infinite;
-}
-
-@keyframes spiceFloat{
- 0%,100%{transform:translateY(0) rotate(-5deg)}
- 50%{transform:translateY(-18px) rotate(5deg)}
-}
-
-.portal{
- position:absolute;
- width:270px;
- height:270px;
- border:2px solid transparent;
- border-radius:50%;
- background:
- linear-gradient(#080f0b,#080f0b) padding-box,
- conic-gradient(#eac66b,#00e5a5,#168fff,#eac66b) border-box;
- box-shadow:0 0 40px #eac66b40,0 0 100px #00e5a530;
- animation:portal 12s linear infinite;
-}
-
-.portal:before,.portal:after{
- content:"";
- position:absolute;
- inset:15px;
- border:1px dashed #eac66b80;
- border-radius:50%;
-}
-
-.portal:after{
- inset:35px;
- border-color:#50f5c270;
-}
-
-@keyframes portal{
- to{transform:rotate(360deg)}
-}
-
-/* Floating spice particles */
-.particle{
- position:absolute;
- color:#eac66b;
- font-size:20px;
- opacity:0;
- pointer-events:none;
- animation:particleFly var(--duration) linear infinite;
- animation-delay:var(--delay);
-}
-
-@keyframes particleFly{
- 0%{opacity:0;transform:translateY(100px) rotate(0) scale(.5)}
- 20%{opacity:.8}
- 80%{opacity:.65}
- 100%{opacity:0;transform:translateY(-450px) rotate(360deg) scale(1.4)}
-}
-
-.tag{
- color:#eac66b;
- letter-spacing:6px;
- font-size:12px;
- margin-bottom:20px;
-}
-
-h1{
- font-size:clamp(40px,7vw,78px);
- letter-spacing:3px;
- background:linear-gradient(90deg,#f7d98b,#50f5c2,#eac66b);
- background-size:200%;
- -webkit-background-clip:text;
- color:transparent;
- animation:goldGlow 4s linear infinite;
-}
-
-@keyframes goldGlow{
- to{background-position:200%}
+@keyframes titleGlow{
+0%{background-position:0%;filter:drop-shadow(0 0 8px #ff3900)}
+50%{background-position:100%;filter:drop-shadow(0 0 28px #ff9b00)}
+100%{background-position:200%;filter:drop-shadow(0 0 8px #ff3900)}
 }
 
 .hero p{
- max-width:600px;
- line-height:1.9;
- color:#c5c9bb;
- margin:22px auto 30px;
+margin-top:16px;
+color:#ffc59a;
+font-size:16px;
+animation:fadeUp 1.2s ease both;
 }
 
-.btn{
- display:inline-block;
- padding:15px 28px;
- border-radius:30px;
- text-decoration:none;
- color:#151108;
- font-weight:bold;
- background:linear-gradient(90deg,#f2d58b,#50f5c2);
- box-shadow:0 0 25px #eac66b55;
- transition:.3s;
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
 }
 
-.btn:hover{
- transform:translateY(-5px) scale(1.05);
- box-shadow:0 0 45px #eac66b99;
+.products{
+position:relative;
+z-index:1;
+width:92%;
+max-width:1600px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(5,minmax(0,1fr));
+gap:22px;
+padding:20px 0 75px;
 }
 
-/* Falling title */
-.intro>*{
- opacity:0;
- animation:fallIn 1.3s cubic-bezier(.2,.8,.2,1) forwards;
+.card{
+position:relative;
+overflow:hidden;
+border-radius:20px;
+background:linear-gradient(145deg,rgba(255,100,20,.15),rgba(70,10,5,.5));
+border:1px solid rgba(255,145,30,.3);
+backdrop-filter:blur(12px);
+opacity:0;
+animation:cardReveal .8s cubic-bezier(.2,.8,.2,1) forwards;
+animation-delay:var(--delay,0s);
+transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease;
 }
 
-.intro .tag{animation-delay:.5s}
-.intro h1{animation-delay:.85s}
-.intro p{animation-delay:1.2s}
-.intro .btn{animation-delay:1.55s}
-
-@keyframes fallIn{
- 0%{
- opacity:0;
- transform:translateY(-130px) scale(.85);
- filter:blur(12px);
- text-shadow:0 0 30px #eac66b;
- }
- 70%{
- opacity:1;
- transform:translateY(12px) scale(1.04);
- filter:blur(0);
- }
- 100%{
- opacity:1;
- transform:translateY(0) scale(1);
- filter:blur(0);
- }
+@keyframes cardReveal{
+from{opacity:0;transform:translateY(45px) scale(.88);filter:blur(5px)}
+to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
 
-.collection{
- padding:65px 7% 110px;
- text-align:center;
+.card:hover{
+transform:translateY(-12px) scale(1.035);
+border-color:#ffb000;
+box-shadow:
+0 20px 45px rgba(0,0,0,.5),
+0 0 25px rgba(255,70,0,.35),
+0 0 45px rgba(255,180,0,.13);
+z-index:2;
 }
 
-.section-title{
- font-size:34px;
- color:#eac66b;
- margin-bottom:12px;
+.card::before{
+content:"";
+position:absolute;
+z-index:3;
+top:-50%;
+left:-120%;
+width:65%;
+height:200%;
+background:linear-gradient(90deg,transparent,rgba(255,220,120,.22),transparent);
+transform:rotate(25deg);
+pointer-events:none;
 }
 
-.section-desc{
- color:#b5b8a8;
- margin-bottom:45px;
+.card:hover::before{animation:lightSweep .8s ease}
+
+@keyframes lightSweep{
+from{left:-120%}
+to{left:150%}
 }
 
-.grid{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:20px;
- max-width:1150px;
- margin:auto;
+.product-link{
+color:inherit;
+text-decoration:none;
+display:block;
+height:100%;
 }
 
-.product{
- height:175px;
- border:1px solid #eac66b30;
- border-radius:20px;
- background:linear-gradient(145deg,#30271799,#10251e99);
- display:flex;
- align-items:center;
- justify-content:center;
- position:relative;
- overflow:hidden;
- opacity:0;
- transform:translateY(70px) scale(.85);
- animation:cardEnter .9s cubic-bezier(.2,.8,.2,1) forwards;
- transition:.4s;
+.product-image{
+width:100%;
+aspect-ratio:1/1;
+background:rgba(255,160,50,.07);
+overflow:hidden;
 }
 
-@keyframes cardEnter{
- to{
- opacity:1;
- transform:translateY(0) scale(1);
- }
+.product-image img{
+width:100%;
+height:100%;
+object-fit:contain;
+padding:10px;
+transition:transform .55s cubic-bezier(.2,.8,.2,1);
 }
 
-.product:before{
- content:"";
- position:absolute;
- inset:-100%;
- background:linear-gradient(
- 45deg,transparent,#eac66b22,transparent,#50f5c222,transparent
- );
- transform:rotate(30deg);
- transition:.7s;
+.card:hover .product-image img{
+transform:scale(1.12) rotate(2deg);
 }
 
-.product:hover:before{
- inset:0;
+.info{padding:15px}
+
+.name{
+font-size:15px;
+font-weight:bold;
+line-height:1.5;
+min-height:44px;
 }
 
-.product:hover{
- transform:translateY(-9px) scale(1.04);
- border-color:#eac66b;
- box-shadow:0 0 30px #eac66b35,0 0 45px #00e5a525;
+.brand{
+font-size:12px;
+color:#ffc39a;
+margin-top:7px;
+}
+
+.price{
+margin-top:11px;
+color:#ffd500;
+font-weight:bold;
+font-size:16px;
+text-shadow:0 0 10px rgba(255,190,0,.3);
 }
 
 .coming{
- position:relative;
- z-index:2;
- font-size:14px;
- letter-spacing:4px;
- color:#f2d58b;
- text-shadow:0 0 18px #eac66b75;
+min-height:260px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+background:linear-gradient(145deg,rgba(160,30,0,.22),rgba(255,130,0,.1));
+}
+
+.star{
+font-size:43px;
+margin-bottom:20px;
+color:#ffd500;
+filter:drop-shadow(0 0 13px #ff5b00);
+animation:starDance 2.5s ease-in-out infinite;
+}
+
+@keyframes starDance{
+0%,100%{transform:translateY(0) rotate(0) scale(1)}
+50%{transform:translateY(-14px) rotate(180deg) scale(1.2)}
+}
+
+.coming-title{
+font-size:17px;
+font-weight:900;
+letter-spacing:3px;
+color:#ffbd28;
+animation:comingGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes comingGlow{
+from{text-shadow:0 0 5px #ff3000}
+to{text-shadow:0 0 20px #ffb000,0 0 30px #ff4b00}
+}
+
+.coming-text{
+margin-top:12px;
+font-size:13px;
+line-height:1.7;
+color:#ffc59a;
 }
 
 footer{
- text-align:center;
- padding:35px 15px;
- border-top:1px solid #ffffff18;
- color:#9a9c8c;
- font-size:12px;
+position:relative;
+z-index:1;
+border-top:1px solid rgba(255,125,20,.2);
+padding:32px 20px;
+text-align:center;
+color:#d5a68a;
+background:rgba(40,10,5,.4);
 }
 
-@media(max-width:800px){
- .grid{grid-template-columns:repeat(2,1fr)}
- nav{padding:14px}
- nav a{margin-left:10px;font-size:11px}
+footer a{
+display:inline-block;
+margin-top:12px;
+color:#ffb52b;
+text-decoration:none;
+transition:.3s;
 }
 
-@media(max-width:420px){
- .grid{grid-template-columns:1fr}
- .product{height:145px}
- .portal{width:210px;height:210px}
+footer a:hover{
+transform:translateY(-3px);
+text-shadow:0 0 12px #ff7800;
+}
+
+@media(max-width:1100px){
+.products{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+
+@media(max-width:750px){
+.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+header{justify-content:center}
+nav{justify-content:center}
+.hero{padding-top:42px}
+.coming{min-height:220px}
+}
+
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{
+animation-duration:.01ms!important;
+animation-iteration-count:1!important;
+}
 }
 </style>
 </head>
 
 <body>
 
-<nav>
- <div class="logo">AVANTA WORLD</div>
- <div>
-  <a href="index.html">HOME</a>
-  <a href="product2.html">SPICES</a>
- </div>
-</nav>
+<div id="particles"></div>
 
-<main>
+<header>
+<div class="logo">AVANTA WORLD</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="index.html#categories">Categories</a>
+</nav>
+</header>
 
 <section class="hero">
-
- <div class="portal"></div>
-
- <div class="hero-content">
-  <div class="spice-symbol">🌶️</div>
-
-  <div class="intro">
-   <div class="tag">AVANTA WORLD • CATEGORY 02</div>
-
-   <h1>DISCOVER SPICE WORLD</h1>
-
-   <p>
-    Discover a universe of aromas, colors and flavors.
-    A new journey of taste begins here.
-   </p>
-
-   <a class="btn" href="index.html">← BACK TO HOME</a>
-  </div>
- </div>
-
+<h1>Spices</h1>
+<p>Spices, seeds and cooking ingredients by Mamami.</p>
 </section>
 
-<section class="collection">
-
- <h2 class="section-title">THE SPICE COLLECTION</h2>
-
- <p class="section-desc">
-  A world of flavor is on its way...
- </p>
-
- <div class="grid" id="productGrid"></div>
-
-</section>
-
-</main>
+<div class="products" id="products"></div>
 
 <footer>
- © 2026 AVANTA WORLD — ALL RIGHTS RESERVED
+<p>© 2026 Avanta World</p>
+<a href="index.html">Back to Home</a>
 </footer>
 
 <script>
-/* Create 60 cards */
-const grid=document.getElementById("productGrid");
+/* Floating spice particles */
 
-for(let i=0;i<60;i++){
- const card=document.createElement("div");
- card.className="product";
- card.style.animationDelay=(1.8+i*.055)+"s";
+const particleBox=document.getElementById("particles");
 
- const text=document.createElement("span");
- text.className="coming";
- text.textContent="COMING SOON";
+const particleColors=[
+"#ff2600",
+"#ff6a00",
+"#ffb000",
+"#ffdc36",
+"#d94b18"
+];
 
- card.appendChild(text);
- grid.appendChild(card);
+for(let i=0;i<75;i++){
+const p=document.createElement("span");
+p.className="particle";
+
+const size=2+Math.random()*6;
+
+p.style.width=size+"px";
+p.style.height=size+"px";
+p.style.left=Math.random()*100+"%";
+p.style.background=particleColors[
+Math.floor(Math.random()*particleColors.length)
+];
+p.style.animationDuration=(7+Math.random()*12)+"s";
+p.style.animationDelay=(-Math.random()*18)+"s";
+
+particleBox.appendChild(p);
 }
 
-/* Floating spice particles */
-const symbols=["✦","✧","❋","✺","·","✴"];
+/* Official Mamami products */
 
-for(let i=0;i<35;i++){
- const particle=document.createElement("div");
- particle.className="particle";
- particle.textContent=symbols[i%symbols.length];
+const products=[
+{
+name:"Mamami Organic Premium Turmeric Powder 100g",
+brand:"Mamami",
+price:"RM 38.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Premium_Turmeric_Powder_100g.png?v=1784366385&width=533",
+link:"https://www.mamami4u.com/products/mamami-premium-tumeric-powder-100g"
+},
+{
+name:"Mamami Organic Wave Black Kampot Pepper 80g",
+brand:"Mamami",
+price:"RM 23.90",
+image:"https://www.mamami4u.com/cdn/shop/files/BlackPepper.webp?v=1787073858&width=533",
+link:"https://www.mamami4u.com/products/organic-wave-kampot-black-pepper-80g"
+},
+{
+name:"Mamami Pandan Leaf Powder 100g",
+brand:"Mamami",
+price:"RM 19.90",
+image:"https://www.mamami4u.com/cdn/shop/files/PandanLeafPowderFront.png?v=1791379831&width=533",
+link:"https://www.mamami4u.com/zh/products/mamami-pandan-leaf-powder-100g"
+},
+{
+name:"Mamami Organic Wave Chia Seeds 200g",
+brand:"Mamami",
+price:"RM 19.90",
+image:"https://www.mamami4u.com/cdn/shop/files/ChiaSeeds.webp?v=1787078120&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-chia-seed"},
+{
+name:"Mamami Organic Brown Flaxseed 200g",
+brand:"Mamami",
+price:"RM 5.50",
+image:"https://www.mamami4u.com/cdn/shop/files/BrownFlaxseed_1.webp?v=1787077201&width=533",
+link:"https://www.mamami4u.com/products/organic-brown-flaxseed"
+},
+{
+name:"Mamami Organic Wave Black Sesame Seeds 100g",
+brand:"Mamami",
+price:"RM 16.90",
+image:"https://www.mamami4u.com/cdn/shop/files/BlackSesameSeed_100g.webp?v=1787076285&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-black-sesame-seeds-100g"
+},
+{
+name:"Mamami Premium Japanese Black Sesame Seeds 100g",
+brand:"Mamami",
+price:"RM 15.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Premium_Japanese_Black_Sesame_Seeds_100g.png?v=1785397191&width=533",
+link:"https://www.mamami4u.com/products/mamami-premium-japanese-black-sesame-seeds-100g"
+},
+{
+name:"Mamami Organic Wave Roasted Golden Sesame Seeds 100g",
+brand:"Mamami",
+price:"RM 15.90",
+image:"https://www.mamami4u.com/cdn/shop/files/RoastedGoldenSesameSeedsFront.png?v=1791375523&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-roasted-golden-sesame-seeds-100g"
+},
+{
+name:"Mamami Organic Wave Roasted White Sesame Seeds 100g",
+brand:"Mamami",
+price:"RM 10.90",
+image:"https://www.mamami4u.com/cdn/shop/files/RoastedWhiteSesameSeeds.png?v=1791379070&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-roasted-white-sesame-seeds-100g"
+},
+{
+name:"Mamami Organic Wave Black Sesame Powder 150g",
+brand:"Mamami",
+price:"RM 18.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Black_Sesame_Powder_150g.png?v=1784388519&width=533",
+link:"https://www.mamami4u.com/products/organic-wave-roasted-black-sesame-powder-150g"
+},
+{
+name:"Mamami Organic Wave Roasted Golden Sesame Powder 120g",
+brand:"Mamami",
+price:"RM 18.90",
+image:"https://www.mamami4u.com/cdn/shop/files/RoastedGoldenSesamePowderFront.png?v=1791376749&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-roasted-golden-sesame-powder-120g"
+}
+];
 
- particle.style.left=Math.random()*100+"%";
- particle.style.top=(40+Math.random()*60)+"%";
- particle.style.setProperty("--duration",(5+Math.random()*8)+"s");
- particle.style.setProperty("--delay",(Math.random()*8)+"s");
+const grid=document.getElementById("products");
 
- document.body.appendChild(particle);
+products.forEach((product,index)=>{
+const card=document.createElement("div");
+card.className="card";
+card.style.setProperty("--delay",(index*.06)+"s");
+
+card.innerHTML=`
+<a class="product-link"
+href="${product.link}"
+target="_blank"
+rel="noopener noreferrer">
+
+<div class="product-image">
+<img
+src="${product.image}"
+alt="${product.name}"
+loading="lazy"
+>
+</div>
+
+<div class="info">
+<div class="name">${product.name}</div>
+<div class="brand">${product.brand}</div>
+<div class="price">${product.price}</div>
+</div>
+
+</a>
+`;
+
+grid.appendChild(card);
+});
+
+/* Exactly 45 Coming Soon cards */
+
+for(let i=0;i<45;i++){
+const card=document.createElement("div");
+card.className="card coming";
+card.style.setProperty("--delay",((i+products.length)*.06)+"s");
+
+card.innerHTML=`
+<div class="star">✦</div>
+<div class="coming-title">COMING SOON</div>
+<div class="coming-text">
+New spices and ingredients<br>
+are on the way.
+</div>
+`;
+
+grid.appendChild(card);
 }
 </script>
 

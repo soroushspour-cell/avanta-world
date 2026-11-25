@@ -3,370 +3,463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVANTA WORLD | FOOD</title>
+<title>Avanta World | Food</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--mint:#8fffd2;
+--blue:#78baff;
 }
 
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    color: white;
-    background:
-        radial-gradient(ellipse at 50% 15%, #164d3b 0%, transparent 45%),
-        linear-gradient(135deg, #061b16, #092c29, #071b20);
+body{
+font-family:Arial,sans-serif;
+min-height:100vh;
+color:white;
+background:
+radial-gradient(circle at 15% 10%,#153e35,transparent 40%),
+radial-gradient(circle at 85% 80%,#102b48,transparent 40%),
+#07111f;
+background-size:200% 200%;
+animation:bgMove 14s ease infinite;
+overflow-x:hidden;
 }
 
-.background-glow {
-    position: fixed;
-    width: 450px;
-    height: 450px;
-    border-radius: 50%;
-    background: #00ff9d;
-    filter: blur(150px);
-    opacity: .12;
-    top: 20%;
-    left: 30%;
-    pointer-events: none;
-    z-index: -1;
-    animation: glow 6s infinite alternate;
+@keyframes bgMove{
+0%,100%{background-position:0% 0%}
+50%{background-position:100% 100%}
 }
 
-@keyframes glow {
-    from { transform: scale(.8); opacity: .08; }
-    to { transform: scale(1.3); opacity: .2; }
+header{
+position:relative;
+z-index:5;
+padding:22px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+background:rgba(255,255,255,.045);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-/* NAVBAR */
-nav {
-    width: 90%;
-    max-width: 1200px;
-    margin: 25px auto;
-    padding: 17px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgba(0,255,170,.3);
-    background: rgba(10,35,30,.65);
-    backdrop-filter: blur(15px);
-    border-radius: 18px;
-    box-shadow: 0 0 25px rgba(0,255,170,.08);
+.logo{
+font-size:27px;
+font-weight:900;
+letter-spacing:2px;
+background:linear-gradient(90deg,#7cf5c5,#7abaff,#b7a2ff);
+background-size:200%;
+-webkit-background-clip:text;
+color:transparent;
+animation:logoShine 4s linear infinite;
 }
 
-.logo {
-    font-size: 21px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    color: #71ffc6;
-    text-shadow: 0 0 15px #00ff9d;
+@keyframes logoShine{
+to{background-position:200% center}
 }
 
-nav a {
-    color: #d8fff0;
-    text-decoration: none;
-    margin-left: 22px;
-    font-size: 13px;
-    font-weight: bold;
-    transition: .3s;
+nav{display:flex;gap:24px}
+nav a{
+color:#dce9f6;
+text-decoration:none;
+transition:.3s;
+}
+nav a:hover{
+color:var(--mint);
+text-shadow:0 0 12px var(--mint);
 }
 
-nav a:hover {
-    color: #00ffb3;
-    text-shadow: 0 0 12px #00ffb3;
+.hero{
+text-align:center;
+padding:65px 20px 45px;
 }
 
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 65px 15px 45px;
-    position: relative;
+.hero h1{
+font-size:clamp(42px,7vw,70px);
+font-weight:900;
+background:linear-gradient(90deg,#8bffd3,#74baff,#c1a2ff,#8bffd3);
+background-size:300% auto;
+-webkit-background-clip:text;
+color:transparent;
+animation:titleGlow 5s linear infinite;
 }
 
-.portal {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 35px;
-    border-radius: 50%;
-    border: 3px solid #5dffbb;
-    box-shadow:
-        0 0 15px #00ff9d,
-        inset 0 0 20px #00ff9d,
-        0 0 55px rgba(0,255,157,.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: portal 8s linear infinite;
-    position: relative;
+@keyframes titleGlow{
+0%{background-position:0%;filter:drop-shadow(0 0 5px #4eaa8b)}
+50%{background-position:100%;filter:drop-shadow(0 0 24px #6caeff)}
+100%{background-position:200%;filter:drop-shadow(0 0 5px #4eaa8b)}
 }
 
-.portal::before,
-.portal::after {
-    content: "";
-    position: absolute;
-    inset: -12px;
-    border-radius: 50%;
-    border: 2px dashed #b4ffe1;
-    opacity: .5;
+.hero p{
+margin-top:16px;
+color:#a9bdd0;
+font-size:16px;
+animation:fadeUp 1.2s ease both;
 }
 
-.portal::after {
-    inset: -23px;
-    border-color: #00d5ff;
-    animation: portal 12s linear infinite reverse;
+@keyframes fadeUp{
+from{opacity:0;transform:translateY(20px)}
+to{opacity:1;transform:translateY(0)}
 }
 
-@keyframes portal {
-    to { transform: rotate(360deg); }
+.products{
+width:92%;
+max-width:1600px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(5,minmax(0,1fr));
+gap:22px;
+padding:20px 0 75px;
 }
 
-.portal-icon {
-    font-size: 65px;
-    animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 15px #00ff9d);
+.card{
+position:relative;
+overflow:hidden;
+border-radius:20px;
+background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));
+border:1px solid rgba(255,255,255,.13);
+backdrop-filter:blur(12px);
+opacity:0;
+animation:cardReveal .8s cubic-bezier(.2,.8,.2,1) forwards;
+animation-delay:var(--delay,0s);
+transition:transform .4s ease,box-shadow .4s ease,border-color .4s ease;
 }
 
-@keyframes float {
-    0%,100% { transform: translateY(-8px); }
-    50% { transform: translateY(8px); }
+@keyframes cardReveal{
+from{opacity:0;transform:translateY(45px) scale(.88);filter:blur(5px)}
+to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
 }
 
-.hero h1 {
-    font-size: clamp(30px, 6vw, 62px);
-    letter-spacing: 4px;
-    color: #d7ffed;
-    text-shadow:
-        0 0 10px #00ff9d,
-        0 0 30px #00aaff;
-    animation: appear 1.2s ease both;
+.card:hover{
+transform:translateY(-12px) scale(1.035);
+border-color:rgba(143,255,210,.55);
+box-shadow:0 20px 45px rgba(0,0,0,.4),0 0 25px rgba(90,255,200,.17);
+z-index:2;
 }
 
-.hero p {
-    margin-top: 18px;
-    color: #a9e5d0;
-    letter-spacing: 2px;
-    font-size: 13px;
-    animation: appear 1.5s ease both;
+.card::before{
+content:"";
+position:absolute;
+z-index:3;
+top:-50%;
+left:-120%;
+width:65%;
+height:200%;
+background:linear-gradient(90deg,transparent,rgba(255,255,255,.17),transparent);
+transform:rotate(25deg);
+pointer-events:none;
 }
 
-@keyframes appear {
-    from { opacity: 0; transform: translateY(-45px); }
-    to { opacity: 1; transform: translateY(0); }
+.card:hover::before{animation:lightSweep .8s ease}
+
+@keyframes lightSweep{
+from{left:-120%}
+to{left:150%}
 }
 
-.line {
-    width: 100px;
-    height: 3px;
-    margin: 25px auto;
-    border-radius: 10px;
-    background: linear-gradient(90deg, transparent, #00ff9d, transparent);
-    box-shadow: 0 0 15px #00ff9d;
+.product-link{
+color:inherit;
+text-decoration:none;
+display:block;
+height:100%;
 }
 
-/* CARDS */
-.section-title {
-    text-align: center;
-    margin: 25px 0 35px;
-    color: #baffdf;
-    letter-spacing: 3px;
-    font-size: 20px;
+.product-image{
+width:100%;
+aspect-ratio:1/1;
+background:rgba(255,255,255,.06);
+overflow:hidden;
 }
 
-.cards {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 17px;
-    padding-bottom: 55px;
+.product-image img{
+width:100%;
+height:100%;
+object-fit:contain;
+padding:10px;
+transition:transform .55s cubic-bezier(.2,.8,.2,1);
 }
 
-.card {
-    min-height: 115px;
-    border: 1px solid rgba(0,255,170,.35);
-    border-radius: 15px;
-    background: linear-gradient(145deg, rgba(25,90,65,.5), rgba(10,35,30,.8));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 12px;
-    position: relative;
-    overflow: hidden;
-    opacity: 0;
-    animation: cardIn .6s ease forwards;
-    transition:.35s;
+.card:hover .product-image img{
+transform:scale(1.12) rotate(2deg);
 }
 
-.card::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    top: 0;
-    left: -100%;
-    background: linear-gradient(90deg, transparent, #00ff9d, transparent);
-    transition: .5s;
+.info{padding:15px}
+.name{
+font-size:15px;
+font-weight:bold;
+line-height:1.5;
+min-height:44px;
+}
+.brand{
+font-size:12px;
+color:#9fb4c8;
+margin-top:7px;
+}
+.price{
+margin-top:11px;
+color:var(--mint);
+font-weight:bold;
+font-size:16px;
 }
 
-.card:hover::before {
-    left: 100%;
+.coming{
+min-height:260px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:20px;
+background:linear-gradient(145deg,rgba(65,110,140,.15),rgba(90,65,130,.13));
 }
 
-.card:hover {
-    transform: translateY(-7px) scale(1.03);
-    border-color: #7affc7;
-    box-shadow: 0 0 22px rgba(0,255,170,.35);
+.star{
+font-size:42px;
+margin-bottom:20px;
+color:#a7ffe0;
+filter:drop-shadow(0 0 12px #7cebd2);
+animation:starDance 2.5s ease-in-out infinite;
 }
 
-.card-number {
-    color: #5dffbb;
-    font-size: 12px;
-    letter-spacing: 2px;
+@keyframes starDance{
+0%,100%{transform:translateY(0) rotate(0) scale(1)}
+50%{transform:translateY(-14px) rotate(180deg) scale(1.2)}
 }
 
-.card-text {
-    font-size: 13px;
-    font-weight: bold;
-    color: #e3fff4;
-    letter-spacing: 1px;
-    text-shadow: 0 0 8px #00ff9d;
+.coming-title{
+font-size:17px;
+font-weight:900;
+letter-spacing:3px;
+color:#b8dfff;
+animation:comingGlow 3s ease-in-out infinite alternate;
 }
 
-@keyframes cardIn {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes comingGlow{
+from{text-shadow:0 0 4px #74baff}
+to{text-shadow:0 0 18px #8fffd2}
 }
 
-/* BACK BUTTON */
-.back {
-    display: block;
-    width: fit-content;
-    margin: 10px auto 65px;
-    padding: 16px 35px;
-    border: 1px solid #61ffc2;
-    border-radius: 30px;
-    color: #d9fff0;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-    background: rgba(0,220,150,.1);
-    box-shadow: 0 0 18px rgba(0,255,170,.2);
-    transition: .3s;
+.coming-text{
+margin-top:12px;
+font-size:13px;
+line-height:1.7;
+color:#a9bfd1;
 }
 
-.back:hover {
-    background: #00c98b;
-    color: #061b16;
-    box-shadow: 0 0 30px #00ff9d;
-    transform: scale(1.05);
+footer{
+border-top:1px solid rgba(255,255,255,.1);
+padding:32px 20px;
+text-align:center;
+color:#94a9bb;
+background:rgba(255,255,255,.025);
 }
 
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 25px;
-    border-top: 1px solid rgba(0,255,170,.2);
-    color: #7daaa0;
-    font-size: 12px;
-    letter-spacing: 2px;
+footer a{
+display:inline-block;
+margin-top:12px;
+color:var(--mint);
+text-decoration:none;
+transition:.3s;
 }
 
-/* MOBILE */
-@media(max-width:600px) {
-    nav {
-        width: 94%;
-        padding: 15px;
-    }
+footer a:hover{
+transform:translateY(-3px);
+text-shadow:0 0 12px var(--mint);
+}
 
-    .logo {
-        font-size: 16px;
-    }
+@media(max-width:1100px){
+.products{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
 
-    nav a {
-        margin-left: 10px;
-        font-size: 11px;
-    }
+@media(max-width:750px){
+.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+header{justify-content:center}
+nav{justify-content:center}
+.hero{padding-top:42px}
+.coming{min-height:220px}
+}
 
-    .cards {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 7px;
-        width: 96%;
-    }
-
-    .card {
-        min-height: 90px;
-        border-radius: 10px;
-        gap: 8px;
-    }
-
-    .card-number {
-        font-size: 9px;
-        letter-spacing: 0;
-    }
-
-    .card-text {
-        font-size: 9px;
-        letter-spacing: 0;
-    }
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{
+animation-duration:.01ms!important;
+animation-iteration-count:1!important;
+}
 }
 </style>
 </head>
 
 <body>
 
-<div class="background-glow"></div>
-
+<header>
+<div class="logo">AVANTA WORLD</div>
 <nav>
-    <div class="logo">AVANTA WORLD</div>
-    <div>
-        <a href="./index.html">HOME</a>
-        <a href="./product1.html">FOOD</a>
-    </div>
+<a href="index.html">Home</a>
+<a href="index.html#categories">Categories</a>
 </nav>
+</header>
 
 <section class="hero">
-
-    <div class="portal">
-        <div class="portal-icon">🍃</div>
-    </div>
-
-    <h1>DISCOVER FOOD WORLD</h1>
-    <div class="line"></div>
-    <p>EXPLORE THE WORLD OF FOOD</p>
-
+<h1>Food</h1>
+<p>Discover food products from around the world.</p>
 </section>
 
-<h2 class="section-title">NEW WORLDS COMING SOON</h2>
-
-<section class="cards" id="cards"></section>
-
-<a class="back" href="./index.html">← BACK TO HOME</a>
+<div class="products" id="products"></div>
 
 <footer>
-    AVANTA WORLD © 2026 — DISCOVER MORE
+<p>© 2026 Avanta World</p>
+<a href="index.html">Back to Home</a>
 </footer>
 
 <script>
-const cards = document.getElementById("cards");
+const products = [
+{
+name:"Organic Wave Organic Rolled Oats 500g",
+brand:"Mamami",
+price:"RM 9.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Organic_Wave_Organic_Rolled_Oats_500g.png?v=1790226908&width=533",
+link:"https://www.mamami4u.com/products/organic-rolled-oat"
+},
+{
+name:"Black Sesame Overnight Oats 120g",
+brand:"Mamami",
+price:"RM 7.11",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Overnight_Oats_With_Black_Sesame_Powder_Special_Blend_120g.png?v=1789457726&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-black-sesame-powder-overnight-oats-special-blend-120g"
+},
+{
+name:"Organic Wave Quinoa Mix 500g",
+brand:"Mamami",
+price:"RM 20.88",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Quinoa_Mix_500g_1_14828771-cb64-4674-8745-3aeb4d2e8b4f.png?v=1789716138&width=533",
+link:"https://www.mamami4u.com/products/mamami-qunioa-mix"
+},
+{
+name:"Organic Wave Chia Seeds 200g",
+brand:"Mamami",
+price:"RM 19.90",
+image:"https://www.mamami4u.com/cdn/shop/files/ChiaSeeds.webp?v=1787078120&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-chia-seed"
+},
+{
+name:"Organic Wave Coconut Flakes 100g",
+brand:"Mamami",
+price:"RM 6.90",
+image:"https://www.mamami4u.com/cdn/shop/files/CoconutFlakeChips.webp?v=1787080485&width=533",
+link:"https://www.mamami4u.com/products/organic-wave-coconut-flakes-chips-100g"
+},
+{
+name:"Protein Booster Overnight Oats 120g",
+brand:"Mamami",
+price:"RM 7.11",
+image:"https://www.mamami4u.com/cdn/shop/files/Protein_Booster_Overnight_Oats_120g.png?v=1793535481&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-protein-booster-okara-powder-overnight-oats-special-blend-120g"
+},
+{
+name:"Organic Wave Black Sesame Seeds 100g",
+brand:"Mamami",
+price:"RM 16.90",
+image:"https://www.mamami4u.com/cdn/shop/files/BlackSesameSeed_100g.webp?v=1787076285&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-black-sesame-seeds-100g"
+},
+{
+name:"Organic Wave Instant Baby Oats 500g",
+brand:"Mamami",
+price:"RM 9.11",
+image:"https://www.mamami4u.com/cdn/shop/files/Baby_Oat_2.png?v=1787207987&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-inistant-baby-oat"
+},
+{
+name:"Organic Wave ChiaMeal 500g",
+brand:"Mamami",
+price:"RM 13.90",
+image:"https://www.mamami4u.com/cdn/shop/files/ChiaMeal.webp?v=1787079364&width=533",
+link:"https://www.mamami4u.com/products/mamami-organic-wave-chiameal-500g"
+},
+{
+name:"Organic Wave Black Sesame Powder 150g",
+brand:"Mamami",
+price:"RM 18.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Black_Sesame_Powder_150g.png?v=1784388519&width=533",
+link:"https://www.mamami4u.com/products/organic-wave-roasted-black-sesame-powder-150g"
+},
+{
+name:"Organic Wave Black Kampot Pepper 80g",
+brand:"Mamami",
+price:"RM 23.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Quinoa_Black_500g.png?v=1789715108&width=533",
+link:"https://www.mamami4u.com/products/organic-wave-kampot-black-pepper-80g"
+},
+{
+name:"Organic Wave Quinoa Red 500g",
+brand:"Mamami",
+price:"RM 26.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Quinoa_Red_500g.png?v=1789717003&width=533",
+link:"https://www.mamami4u.com/products/organic-wave-quinoa-red-500g"
+},
+{
+name:"Organic Wave Oat Bran 500g",
+brand:"Mamami",
+price:"RM 11.90",
+image:"https://www.mamami4u.com/cdn/shop/files/MAMAMI_ORGANIC_WAVE_OAT_BRAN_500G.png?v=1784391023&width=533",
+link:"https://www.mamami4u.com/products/oat-bran"
+},
+{
+name:"Organic Wave Quinoa White 500g",
+brand:"Mamami",
+price:"RM 23.90",
+image:"https://www.mamami4u.com/cdn/shop/files/Mamami_Organic_Wave_Quinoa_White_500g_1.png?v=1789717452&width=533",
+link:"https://www.mamami4u.com/products/mamami-quinoa-white"
+},
+{
+name:"Organic Wave 5 Colour Beans 500g",
+brand:"Mamami",
+price:"RM 10.90",
+image:"https://www.mamami4u.com/cdn/shop/files/MAMAMI_ORGANIC_WAVE_FIVE_COLOUR_BEANS_500G.png?v=1784392466&width=533",
+link:"https://www.mamami4u.com/products/organic-5-color-beans"
+}
+];
 
-for (let i = 1; i <= 60; i++) {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.animationDelay = `${Math.min(i * 0.03, 1.8)}s`;
+const grid = document.getElementById("products");
 
-    card.innerHTML = `
-        <span class="card-number">WORLD ${String(i).padStart(2, "0")}</span>
-        <span class="card-text">COMING SOON</span>
-    `;
+products.forEach((product,index)=>{
+const card=document.createElement("div");
+card.className="card";
+card.style.setProperty("--delay",(index*.06)+"s");
 
-    cards.appendChild(card);
+card.innerHTML=`
+<a class="product-link" href="${product.link}" target="_blank" rel="noopener noreferrer">
+<div class="product-image">
+<img src="${product.image}" alt="${product.name}" loading="lazy">
+</div>
+<div class="info">
+<div class="name">${product.name}</div>
+<div class="brand">${product.brand}</div>
+<div class="price">${product.price}</div>
+</div>
+</a>
+`;
+
+grid.appendChild(card);
+});
+
+// Exactly 45 Coming Soon cards
+for(let i=0;i<45;i++){
+const card=document.createElement("div");
+card.className="card coming";
+card.style.setProperty("--delay",((i+products.length)*.06)+"s");
+
+card.innerHTML=`
+<div class="star">✦</div>
+<div class="coming-title">COMING SOON</div>
+<div class="coming-text">
+New food products<br>
+are on the way.
+</div>
+`;
+
+grid.appendChild(card);
 }
 </script>
 

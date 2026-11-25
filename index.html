@@ -3,541 +3,276 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AVANTA WORLD | HOME</title>
+<title>AVANTA WORLD</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:#06120f;color:white;
+ font-family:Arial,sans-serif;overflow-x:hidden;
+}
+body:before{
+ content:"";position:fixed;inset:0;z-index:-2;
+ background:
+ radial-gradient(circle at 20% 20%,#087e6250,transparent 35%),
+ radial-gradient(circle at 80% 70%,#087bd650,transparent 35%),
+ #06120f;
+}
+body:after{
+ content:"";position:fixed;inset:0;z-index:-1;
+ background:linear-gradient(120deg,transparent,#00e5a510,transparent);
+ animation:backgroundGlow 7s infinite alternate;
+}
+@keyframes backgroundGlow{
+ from{opacity:.3}to{opacity:1}
+}
+nav{
+ position:fixed;top:18px;left:5%;width:90%;
+ display:flex;justify-content:space-between;align-items:center;
+ padding:17px 25px;border:1px solid #ffffff20;
+ border-radius:18px;background:#071b19b9;
+ backdrop-filter:blur(18px);z-index:10;
+}
+.logo{font-weight:900;letter-spacing:3px;color:#50f5c2}
+nav a{
+ color:#ddd;text-decoration:none;margin-left:20px;
+ font-size:13px;transition:.3s
+}
+nav a:hover{color:#50f5c2}
+.hero{
+ min-height:1000px;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;
+ padding:120px 20px 70px;position:relative;
+}
+.mascot{
+ width:130px;height:130px;border-radius:50%;
+ display:grid;place-items:center;font-size:75px;
+ background:linear-gradient(135deg,#0a765d,#087ac0);
+ box-shadow:0 0 35px #00e5aa70,0 0 80px #008cff40;
+ animation:float 3s ease-in-out infinite;
+ position:relative;z-index:2;
+}
+@keyframes float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-15px)}
+}
+.orbit{
+ position:absolute;width:190px;height:65px;
+ border:1px solid #50f5c255;border-radius:50%;
+ transform:rotate(-25deg);
+ animation:orbit 8s linear infinite;
+}
+.orbit.two{
+ width:220px;height:85px;border-color:#168fff66;
+ transform:rotate(35deg);animation-direction:reverse;
+}
+@keyframes orbit{to{rotate:360deg}}
+.hero h1{
+ font-size:clamp(38px,7vw,78px);
+ margin-top:45px;letter-spacing:3px;
+ background:linear-gradient(90deg,#54f5c3,#42aaff);
+ -webkit-background-clip:text;color:transparent;
+}
+.hero p{
+ max-width:600px;line-height:1.8;color:#b6c9c4;
+ margin:20px auto 30px;font-size:16px;
+}
+.tag{
+ color:#50f5c2;letter-spacing:5px;font-size:12px;
+ margin-top:30px;
+}
+.btn{
+ display:inline-block;padding:15px 28px;
+ border-radius:30px;text-decoration:none;
+ color:#04140f;font-weight:bold;
+ background:linear-gradient(90deg,#50f5c2,#48aaff);
+ box-shadow:0 0 25px #00dca655;
+ transition:.3s;
+}
+.btn:hover{transform:translateY(-5px);box-shadow:0 0 40px #00dca9}
+.stats{
+ display:flex;gap:55px;justify-content:center;
+ margin-top:65px;flex-wrap:wrap;
+}
+.stat strong{display:block;font-size:27px;color:#50f5c2}
+.stat span{font-size:12px;color:#a8bcb5}
+section{padding:85px 7%;text-align:center}
+.section-title{
+ font-size:36px;margin-bottom:15px;color:#50f5c2;
+}
+.section-desc{color:#aabdb7;margin-bottom:45px}
+.cards{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:20px;max-width:1100px;margin:auto;
+}
+.card{
+ min-height:190px;padding:30px 15px;
+ border:1px solid #ffffff20;border-radius:20px;
+ background:linear-gradient(145deg,#12332b99,#09202c99);
+ text-decoration:none;color:white;
+ display:flex;flex-direction:column;
+ justify-content:center;align-items:center;
+ transition:.35s;
+}
+.card:hover{
+ transform:translateY(-10px);
+ border-color:#50f5c2;
+ box-shadow:0 0 30px #00dca933;
+}
+.card .emoji{font-size:40px;margin-bottom:15px}
+.card h3{letter-spacing:2px;margin-bottom:10px}
+.card p{font-size:12px;color:#9eb6ad}
+.about{
+ max-width:750px;margin:auto;line-height:2;color:#b5c8c0;
+}
+footer{
+ text-align:center;padding:35px 15px;
+ border-top:1px solid #ffffff18;
+ color:#829b91;font-size:12px;
 }
 
-html {
-    scroll-behavior: smooth;
+/* Falling + glowing text */
+@keyframes skyFall{
+ 0%{
+  opacity:0;
+  transform:translateY(-180px) rotate(-8deg) scale(.8);
+  filter:blur(12px);
+  text-shadow:0 0 0 transparent;
+ }
+ 65%{
+  opacity:1;
+  transform:translateY(12px) rotate(3deg) scale(1.05);
+  filter:blur(0);
+  text-shadow:0 0 30px #50f5c2,0 0 55px #168fff;
+ }
+ 85%{transform:translateY(-5px) rotate(-1deg) scale(.98)}
+ 100%{
+  opacity:1;transform:translateY(0) rotate(0) scale(1);
+  filter:blur(0);
+  text-shadow:0 0 15px #50f5c255;
+ }
 }
-
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-    font-family: Arial, sans-serif;
-    color: white;
-    background:
-        radial-gradient(ellipse at 50% 15%, #123d35 0%, transparent 45%),
-        linear-gradient(135deg, #061a17, #092a30, #07151f);
+.fall{
+ opacity:0;
+ animation:skyFall 1.25s cubic-bezier(.2,.8,.2,1) forwards;
 }
+.tag.fall{animation-delay:.2s}
+.hero h1.fall{animation-delay:.55s}
+.hero p.fall{animation-delay:.9s}
+.hero .btn.fall{animation-delay:1.25s}
+.stats.fall{animation-delay:1.55s}
 
-.background-glow {
-    position: fixed;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: #00ffb3;
-    filter: blur(150px);
-    opacity: .12;
-    top: 15%;
-    left: 25%;
-    pointer-events: none;
-    z-index: -1;
-    animation: glow 7s infinite alternate;
+@media(max-width:800px){
+ .cards{grid-template-columns:repeat(2,1fr)}
+ nav{padding:14px}
+ nav a{margin-left:10px;font-size:11px}
 }
-
-.blue-glow {
-    position: fixed;
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    background: #008cff;
-    filter: blur(150px);
-    opacity: .12;
-    bottom: 5%;
-    right: 5%;
-    pointer-events: none;
-    z-index: -1;
-}
-
-@keyframes glow {
-    from { transform: scale(.8); opacity: .08; }
-    to { transform: scale(1.3); opacity: .2; }
-}
-
-/* NAVBAR */
-nav {
-    width: 90%;
-    max-width: 1200px;
-    margin: 25px auto;
-    padding: 17px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgba(0,255,170,.3);
-    background: rgba(10,35,35,.65);
-    backdrop-filter: blur(15px);
-    border-radius: 18px;
-    box-shadow: 0 0 25px rgba(0,255,170,.08);
-}
-
-.logo {
-    font-size: 21px;
-    font-weight: 900;
-    letter-spacing: 3px;
-    color: #71ffc6;
-    text-shadow: 0 0 15px #00ff9d;
-}
-
-nav a {
-    color: #d8fff0;
-    text-decoration: none;
-    margin-left: 22px;
-    font-size: 13px;
-    font-weight: bold;
-    transition: .3s;
-}
-
-nav a:hover {
-    color: #00ffb3;
-    text-shadow: 0 0 12px #00ffb3;
-}
-
-/* HERO */
-.hero {
-    text-align: center;
-    padding: 80px 15px 65px;
-    position: relative;
-}
-
-.mascot {
-    width: 175px;
-    height: 175px;
-    margin: 0 auto 35px;
-    border-radius: 50%;
-    border: 2px solid #5dffbb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow:
-        0 0 20px #00ff9d,
-        inset 0 0 25px rgba(0,255,157,.3),
-        0 0 60px rgba(0,255,157,.25);
-    animation: mascotFloat 4s ease-in-out infinite;
-}
-
-.mascot::before {
-    content: "";
-    position: absolute;
-    inset: -13px;
-    border: 2px dashed #00cfff;
-    border-radius: 50%;
-    animation: rotate 12s linear infinite;
-}
-
-.mascot::after {
-    content: "";
-    position: absolute;
-    inset: -24px;
-    border: 1px solid rgba(0,255,200,.4);
-    border-radius: 50%;
-    animation: rotate 18s linear infinite reverse;
-}
-
-.mascot span {
-    font-size: 85px;
-    filter: drop-shadow(0 0 15px #00eaff);
-}
-
-@keyframes mascotFloat {
-    0%,100% { transform: translateY(-8px); }
-    50% { transform: translateY(8px); }
-}
-
-@keyframes rotate {
-    to { transform: rotate(360deg); }
-}
-
-.hero h1 {
-    font-size: clamp(32px, 6vw, 65px);
-    letter-spacing: 4px;
-    color: #d7ffed;
-    text-shadow:
-        0 0 10px #00ff9d,
-        0 0 30px #008cff;
-    animation: appear 1.2s ease both;
-}
-
-.hero p {
-    margin-top: 20px;
-    color: #a9e5d0;
-    letter-spacing: 3px;
-    font-size: 13px;
-    animation: appear 1.5s ease both;
-}
-
-@keyframes appear {
-    from { opacity: 0; transform: translateY(-45px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.line {
-    width: 120px;
-    height: 3px;
-    margin: 27px auto;
-    border-radius: 10px;
-    background: linear-gradient(90deg, transparent, #00ff9d, #00aaff, transparent);
-    box-shadow: 0 0 15px #00ff9d;
-}
-
-/* STATS */
-.stats {
-    width: 90%;
-    max-width: 850px;
-    margin: 10px auto 75px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-}
-
-.stat {
-    padding: 22px 10px;
-    text-align: center;
-    border: 1px solid rgba(0,229,255,.25);
-    border-radius: 16px;
-    background: rgba(10,35,45,.6);
-    backdrop-filter: blur(10px);
-}
-
-.stat h2{
-    color: #65f7ff;
-    font-size: 25px;
-    text-shadow: 0 0 12px #00dfff;
-}
-
-.stat p {
-    margin-top: 9px;
-    color: #a9dce5;
-    font-size: 11px;
-    letter-spacing: 1px;
-}
-
-/* CATEGORIES */
-.section-title {
-    text-align: center;
-    margin: 30px 0 15px;
-    color: #baffdf;
-    letter-spacing: 3px;
-    font-size: 23px;
-}
-
-.section-subtitle {
-    text-align: center;
-    color: #91bac1;
-    font-size: 13px;
-    margin-bottom: 40px;
-}
-
-.categories {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-    padding-bottom: 85px;
-}
-
-.category-card {
-    min-height: 230px;
-    padding: 30px 20px;
-    border: 1px solid rgba(0,229,255,.3);
-    border-radius: 22px;
-    background: linear-gradient(145deg, rgba(20,65,65,.7), rgba(8,25,35,.9));
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    text-decoration: none;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    transition: .4s;
-    animation: cardIn .8s ease both;
-}
-
-.category-card::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    top: 0;
-    left: -100%;
-    background: linear-gradient(90deg, transparent, #00eaff, #00ff9d, transparent);
-    transition: .6s;
-}
-
-.category-card:hover::before {
-    left: 100%;
-}
-
-.category-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    border-color: #65f7ff;
-    box-shadow: 0 0 30px rgba(0,229,255,.25);
-}
-
-.category-icon {
-    font-size: 55px;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 12px #00dfff);
-}
-
-.category-card h2 {
-    font-size: 24px;
-    letter-spacing: 3px;
-    color: #baffef;
-    text-shadow: 0 0 12px #00dfff;
-}
-
-.category-card p {
-    margin-top: 12px;
-    color: #9ac9cc;
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
-.category-card .explore {
-    margin-top: 22px;
-    padding: 10px 22px;
-    border: 1px solid rgba(0,255,200,.5);
-    border-radius: 25px;
-    color: #baffef;
-    font-size: 11px;
-    letter-spacing: 2px;
-}
-
-@keyframes cardIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* ABOUT */
-.about {
-    width: 90%;
-    max-width: 950px;
-    margin: 0 auto 85px;
-    padding: 45px 30px;
-    border: 1px solid rgba(0,229,255,.25);
-    border-radius: 22px;
-    background: rgba(10,35,45,.55);
-    text-align: center;
-    box-shadow: 0 0 35px rgba(0,229,255,.06);
-}
-
-.about h2 {
-    color: #75f5ff;
-    font-size: 25px;
-    letter-spacing: 3px;
-    margin-bottom: 22px;
-}
-
-.about p {
-    color: #b2d4d6;
-    line-height: 2;
-    font-size: 14px;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 30px 15px;
-    border-top: 1px solid rgba(0,255,170,.2);
-    color: #7daaa0;
-    font-size: 12px;
-    letter-spacing: 2px;
-}
-
-@media(max-width:600px) {
-    nav {
-        width: 94%;
-        padding: 15px;
-    }
-
-    .logo {
-        font-size: 15px;
-        letter-spacing: 2px;
-    }
-
-    nav a {
-        margin-left: 10px;
-        font-size: 10px;
-    }
-
-    .hero {
-        padding-top: 65px;
-    }
-
-    .stats {
-        width: 94%;
-        gap: 8px;
-    }
-
-    .stat h2 {
-        font-size: 20px;
-    }
-
-    .stat p {
-        font-size: 9px;
-    }
-
-    .categories {
-        width: 94%;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-
-    .category-card {
-        min-height: 190px;
-        padding: 20px 10px;
-    }
-
-    .category-icon {
-        font-size: 40px;
-    }
-
-    .category-card h2 {
-        font-size: 17px;
-        letter-spacing: 1px;
-    }
-
-    .category-card p {
-        font-size: 9px;
-        letter-spacing: 1px;
-    }
-
-    .category-card .explore {
-        font-size: 9px;
-        padding: 8px 12px;
-    }
-
-    .about {
-        padding: 30px 20px;
-    }
+@media(max-width:420px){
+ .cards{grid-template-columns:1fr}
+ .stats{gap:25px}
 }
 </style>
 </head>
 
 <body>
 
-<div class="background-glow"></div>
-<div class="blue-glow"></div>
-
 <nav>
-    <div class="logo">AVANTA WORLD</div>
-    <div>
-        <a href="#home">HOME</a>
-        <a href="#categories">EXPLORE</a>
-        <a href="#about">ABOUT</a>
-    </div>
+ <div class="logo">AVANTA WORLD</div>
+ <div>
+  <a href="index.html">HOME</a>
+  <a href="#categories">EXPLORE</a>
+  <a href="#about">ABOUT</a>
+ </div>
 </nav>
 
-<section class="hero" id="home">
+<main>
+ <div class="hero" id="home">
 
-    <div class="mascot" id="mascot">
-        <span>👋</span>
-    </div>
+  <div class="mascot" id="mascot">
+   <div class="orbit"></div>
+   <div class="orbit two"></div>
+   👋
+  </div>
 
-    <h1>DISCOVER A NEW WORLD</h1>
-    <div class="line"></div>
-    <p>EXPLORE • DISCOVER • EXPERIENCE</p>
+  <div class="tag fall">WELCOME TO AVANTA</div>
 
-</section>
+  <h1 class="fall">DISCOVER A NEW WORLD</h1>
 
-<section class="stats">
+  <p class="fall">
+   Explore a world of possibilities.
+   Discover products, ideas and new experiences
+   with AVANTA WORLD.
+  </p>
 
-    <div class="stat">
-        <h2>4</h2>
-        <p>WORLDS</p>
-    </div>
+  <a class="btn fall" href="#categories">START EXPLORING</a>
 
-    <div class="stat">
-        <h2>360+</h2>
-        <p>COMING SOON</p>
-    </div>
+  <div class="stats fall">
+   <div class="stat">
+    <strong>04</strong><span>CATEGORIES</span>
+   </div>
+   <div class="stat">
+    <strong>240</strong><span>PRODUCT SPACES</span>
+   </div>
+   <div class="stat">
+    <strong>∞</strong><span>POSSIBILITIES</span>
+   </div>
+  </div>
+ </div>
 
-    <div class="stat">
-        <h2>∞</h2>
-        <p>POSSIBILITIES</p>
-    </div>
+ <section id="categories">
+  <h2 class="section-title">EXPLORE OUR WORLD</h2>
+  <p class="section-desc">Choose your world and discover more.</p>
 
-</section>
+  <div class="cards">
 
-<section id="categories">
+   <a class="card" href="./product1.html">
+    <div class="emoji">🍃</div>
+    <h3>FOOD</h3>
+    <p>Discover the food world</p>
+   </a>
 
-    <h2 class="section-title">CHOOSE YOUR WORLD</h2>
-    <p class="section-subtitle">YOUR NEXT DISCOVERY STARTS HERE</p>
+   <a class="card" href="./product2.html">
+    <div class="emoji">🌶️</div>
+    <h3>SPICES</h3>
+    <p>Discover new flavors</p>
+   </a>
 
-    <div class="categories">
+   <a class="card" href="./product3.html">
+    <div class="emoji">👕</div>
+    <h3>CLOTHES</h3>
+    <p>Explore clothing</p>
+   </a>
 
-        <a class="category-card" href="./product1.html">
-            <div class="category-icon">🍃</div>
-            <h2>FOOD</h2>
-            <p>DISCOVER FOOD WORLD</p>
-            <span class="explore">EXPLORE WORLD →</span>
-        </a>
+   <a class="card" href="./product4.html">
+    <div class="emoji">✨</div>
+    <h3>OTHER</h3>
+    <p>Explore more possibilities</p>
+   </a>
 
-        <a class="category-card" href="./product2.html">
-            <div class="category-icon">🌶️</div>
-            <h2>SPICES</h2>
-            <p>DISCOVER SPICE WORLD</p>
-            <span class="explore">EXPLORE WORLD →</span>
-        </a>
+  </div>
+ </section>
 
-        <a class="category-card" href="./product3.html">
-            <div class="category-icon">👕</div>
-            <h2>CLOTHES</h2>
-            <p>DISCOVER STYLE WORLD</p>
-            <span class="explore">EXPLORE WORLD →</span>
-        </a>
-
-        <a class="category-card" href="./product4.html">
-            <div class="category-icon">💎</div>
-            <h2>OTHER</h2>
-            <p>EXPLORE THE UNEXPECTED</p>
-            <span class="explore">EXPLORE WORLD →</span>
-        </a>
-
-    </div>
-
-</section>
-
-<section class="about" id="about">
-
-    <h2>ABOUT AVANTA WORLD</h2>
-
-    <p>
-        Welcome to AVANTA WORLD.
-        A place where discovery meets creativity.
-        Explore different worlds, discover new possibilities
-        and experience something new.
-        Your journey starts here.
-    </p>
-
-</section>
+ <section id="about">
+  <h2 class="section-title">ABOUT AVANTA</h2>
+  <p class="about">
+   AVANTA WORLD is a place to explore different categories
+   and discover new possibilities. Our world is always growing.
+  </p>
+ </section>
+</main>
 
 <footer>
-    AVANTA WORLD © 2026 — DISCOVER MORE
+ © 2026 AVANTA WORLD — ALL RIGHTS RESERVED
 </footer>
 
 <script>
-window.addEventListener("load", function() {
-    const mascot = document.getElementById("mascot");
-
-    if (mascot) {
-        const position = mascot.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({
-            top: position - 100,
-            behavior: "smooth"
-        });
-    }
+window.addEventListener("load",()=>{
+ const mascot=document.getElementById("mascot");
+ if(mascot){
+  const top=mascot.getBoundingClientRect().top+window.scrollY;
+  window.scrollTo(0,top-100);
+ }
 });
 </script>
 

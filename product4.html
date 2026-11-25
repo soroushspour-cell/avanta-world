@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AVANTA WORLD | OTHER</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(ellipse at 50% 15%, #164e5a 0%, transparent 45%),
+        linear-gradient(135deg, #06151c, #091f2c, #07131d);
+}
+
+.background-glow {
+    position: fixed;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: #00e5ff;
+    filter: blur(150px);
+    opacity: .12;
+    top: 20%;
+    left: 30%;
+    pointer-events: none;
+    animation: glow 6s infinite alternate;
+    z-index: -1;
+}
+
+@keyframes glow {
+    from { transform: scale(.8); opacity: .08; }
+    to { transform: scale(1.3); opacity: .2; }
+}
+
+/* NAVBAR */
+nav {
+    width: 90%;
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 17px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(0,229,255,.3);
+    background: rgba(10,30,40,.65);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(0,229,255,.08);
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: #66f4ff;
+    text-shadow: 0 0 15px #00dfff;
+}
+
+nav a {
+    color: #d8faff;
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 13px;
+    font-weight: bold;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00eaff;
+    text-shadow: 0 0 12px #00eaff;
+}
+
+/* HERO */
+.hero {
+    text-align: center;
+    padding: 65px 15px 45px;
+    position: relative;
+}
+
+.portal {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 35px;
+    border-radius: 50%;
+    border: 3px solid #53f4ff;
+    box-shadow:
+        0 0 15px #00eaff,
+        inset 0 0 20px #00eaff,
+        0 0 55px rgba(0,229,255,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: portal 8s linear infinite;
+    position: relative;
+}
+
+.portal::before,
+.portal::after {
+    content: "";
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 2px dashed #b4fbff;
+    opacity: .5;
+}
+
+.portal::after {
+    inset: -23px;
+    border-color: #00a9ff;
+    animation: portal 12s linear infinite reverse;
+}
+
+@keyframes portal {
+    to { transform: rotate(360deg); }
+}
+
+.portal-icon {
+    font-size: 65px;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px #00eaff);
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(-8px); }
+    50% { transform: translateY(8px); }
+}
+
+.hero h1 {
+    font-size: clamp(30px, 6vw, 62px);
+    letter-spacing: 4px;
+    color: #d7fbff;
+    text-shadow:
+        0 0 10px #00eaff,
+        0 0 30px #008cff;
+    animation: appear 1.2s ease both;
+}
+
+.hero p {
+    margin-top: 18px;
+    color: #a9dce5;
+    letter-spacing: 2px;
+    font-size: 13px;
+    animation: appear 1.5s ease both;
+}
+
+@keyframes appear {
+    from { opacity: 0; transform: translateY(-45px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.line {
+    width: 100px;
+    height: 3px;
+    margin: 25px auto;
+    border-radius: 10px;
+    background: linear-gradient(90deg, transparent, #00eaff, transparent);
+    box-shadow: 0 0 15px #00eaff;
+}
+
+/* CARDS */
+.section-title {
+    text-align: center;
+    margin: 25px 0 35px;
+    color: #bafaff;
+    letter-spacing: 3px;
+    font-size: 20px;
+}
+
+.cards {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 17px;
+    padding-bottom: 55px;
+}
+
+.card {
+    min-height: 115px;
+    border: 1px solid rgba(0,229,255,.35);
+    border-radius: 15px;
+    background: linear-gradient(145deg, rgba(25,75,90,.5), rgba(10,25,40,.8));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: cardIn .6s ease forwards;
+    transition: .35s;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    left: -100%;
+    background: linear-gradient(90deg, transparent, #00eaff, transparent);
+    transition: .5s;
+}
+
+.card:hover::before {
+    left: 100%;
+}
+
+.card:hover {
+    transform: translateY(-7px) scale(1.03);
+    border-color: #7af8ff;
+    box-shadow: 0 0 22px rgba(0,229,255,.35);
+}
+
+.card-number {
+    color: #5deeff;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.card-text {
+    font-size: 13px;
+    font-weight: bold;
+    color: #e3fcff;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px #00bfff;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* BACK BUTTON */
+.back {
+    display: block;
+    width: fit-content;
+    margin: 10px auto 65px;
+    padding: 16px 35px;
+    border: 1px solid #61f5ff;
+    border-radius: 30px;
+    color: #d9fcff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: rgba(0,220,255,.1);
+    box-shadow: 0 0 18px rgba(0,229,255,.2);
+    transition: .3s;
+}
+
+.back:hover {
+    background: #00bcd4;
+    color: #06151c;
+    box-shadow: 0 0 30px #00eaff;
+    transform: scale(1.05);
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid rgba(0,229,255,.2);
+    color: #7daab5;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* MOBILE */
+@media(max-width:600px) {
+    nav {
+        width: 94%;
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    nav a {
+        margin-left: 10px;
+        font-size: 11px;
+    }
+
+    .cards {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 7px;
+        width: 96%;
+    }
+
+    .card {
+        min-height: 90px;
+        border-radius: 10px;
+        gap: 8px;
+    }
+
+    .card-number {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+
+    .card-text {
+        font-size: 9px;
+        letter-spacing: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background-glow"></div>
+
+<nav>
+    <div class="logo">AVANTA WORLD</div>
+    <div>
+        <a href="./index.html">HOME</a>
+        <a href="./product4.html">OTHER</a>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="portal">
+        <div class="portal-icon">💎</div>
+    </div>
+
+    <h1>DISCOVER OTHER WORLD</h1>
+    <div class="line"></div>
+    <p>EXPLORE THE UNEXPECTED</p>
+
+</section>
+
+<h2 class="section-title">NEW WORLDS COMING SOON</h2>
+
+<section class="cards" id="cards"></section>
+
+<a class="back" href="./index.html">← BACK TO HOME</a>
+
+<footer>
+    AVANTA WORLD © 2026 — DISCOVER MORE
+</footer>
+
+<script>
+const cards = document.getElementById("cards");
+
+for (let i = 1; i <= 180; i++) {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.animationDelay = `${Math.min(i * 0.015, 2)}s`;
+
+    card.innerHTML = `
+        <span class="card-number">WORLD ${String(i).padStart(3, "0")}</span>
+        <span class="card-text">COMING SOON</span>
+    `;
+
+    cards.appendChild(card);
+}
+</script>
+
+</body>
+</html>
